@@ -8,7 +8,7 @@ function windowfuntion() {
  */
 
     let iconArrayHolder = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf", "fa fa-bicycle", "fa fa-diamond", "fa fa-bomb", "fa fa-leaf", "fa fa-bomb", "fa fa-bolt", "fa fa-bicycle", "fa fa-paper-plane-o", "fa fa-cube"];
-
+ 
 /* get dom */
     const scorePanel = document.getElementsByClassName("score-panel");
     const movesMade = document.querySelector(".moves");
@@ -24,16 +24,18 @@ function windowfuntion() {
  *   - add each card's HTML to the page
  */
     restart.addEventListener("click", resetFun);
-
+    var bool = true;
     function resetFun() {
         
 
         shuffleFunction();
-        if(true) {
-        startCount();
+        if(bool) {
+            startCount();
+        }else{
+            stopCount();
         }
-
-
+        bool = false;
+        
         }
     
     function shuffleFunction() {
@@ -78,12 +80,12 @@ function windowfuntion() {
     function cardFun(evt) {
         let placeClicked = evt.target;
         console.log(placeClicked);
-        placeClicked.addEventListener("click", functionCounterMoves);
-        
+        placeClicked.addEventListener("click", clickCounterMoves);
+        // window.location.reload(false);
     }   
 // when you call it for a value -1 for the call to get it
     var keepCountMoves = 0;
-    var functionCounterMoves = function(){
+    var clickCounterMoves = function(){
         keepCountMoves++
         return keepCountMoves;
     }
@@ -91,14 +93,14 @@ function windowfuntion() {
     
 
 /* got help from https://www.w3schools.com/jsref/met_win_cleartimeout.asp  */    
-    var c = 1;
-    var t;
+    var number = 1;
+    var timer;
     var timer_is_on = 0;
 
     function timedCount() {
-        document.getElementById("timeSpan").innerHTML = ` TIME: ${c}`;
-        t = setTimeout(function(){timedCount()}, 1000);
-        c++;
+        document.getElementById("timeSpan").innerHTML = ` TIME: ${number}`;
+        timer = setTimeout(function(){timedCount()}, 1000);
+        number++;
     }
 
     function startCount() {
@@ -110,7 +112,7 @@ function windowfuntion() {
     }
 
     function stopCount() {
-        clearTimeout(t);
+        clearTimeout(timer);
         timer_is_on = 0;
     }
 
