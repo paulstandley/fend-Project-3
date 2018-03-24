@@ -82,9 +82,9 @@ function windowfuntion() {
         let placeClicked = evt.target;
         console.log(placeClicked);
         placeClicked.addEventListener("click", clickCounterMoves);
-        // window.location.reload(false);
+        
     }   
-// when you call it for a value -1 for the call to get it
+// when you call it for a value -1 for the call because you called it
     var keepCountMoves = 0;
     var clickCounterMoves = function(){
         keepCountMoves++
