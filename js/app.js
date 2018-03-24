@@ -82,16 +82,19 @@ function windowfuntion() {
         let placeClicked = evt.target;
         console.log(placeClicked);
         placeClicked.addEventListener("click", clickCounterMoves);
-        
+        console.log(placeClicked.hasAttribute("id"));
+        if(placeClicked.hasAttribute("id")) {
+
+            let clickedIcon = placeClicked.getElementsByTagName("i");
+            console.log(clickedIcon); 
+        }
     }   
 // when you call it for a value -1 for the call because you called it
     var keepCountMoves = 0;
     var clickCounterMoves = function(){
         keepCountMoves++
         return keepCountMoves;
-    }
-    
-    
+    } 
 
 /* got help from https://www.w3schools.com/jsref/met_win_cleartimeout.asp  */    
     var number = 1;
@@ -109,7 +112,6 @@ function windowfuntion() {
             timer_is_on = 1;
             timedCount();
         }
-    
     }
 
     function stopCount() {
