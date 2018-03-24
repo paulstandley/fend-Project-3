@@ -33,6 +33,7 @@ function windowfuntion() {
             startCount();
         }else{
             stopCount();
+            window.location.reload(false);
         }
         bool = false;
         
