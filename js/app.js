@@ -89,13 +89,19 @@ function windowfuntion() {
             if(numberOfClicks) {
 
                 firstClick(placeClicked);
-                
+                var compare = placeClicked.getElementsByTagName("i");
+                var compareValue = compare[0].getAttribute("class");
+                console.log(compareValue);
             }else if(!numberOfClicks) {
 
                 let placeClicked_2 = evt.target;
                 let clickedIcon_2 = placeClicked_2.getElementsByTagName("i");
                 let clickedIcon_2Class = clickedIcon_2[0].getAttribute("class");
-                console.log(placeClicked);
+                // comapere value unefined
+                    console.log(compareValue);
+                if(compareValue == clickedIcon_2Class) {
+                    console.log("clicked");
+                }
                 console.log(clickedIcon_2Class);
 
             }
@@ -119,9 +125,7 @@ function windowfuntion() {
     function firstClick(placeClicked) {
         let clickedIcon_1 = placeClicked.getElementsByTagName("i");
         let clickedIcon_1Class = clickedIcon_1[0].getAttribute("class");
-        console.log(clickedIcon_1Class);
         let showClicked = placeClicked;
-        console.log(showClicked);
         let showClass = showClicked.getAttribute("class");
         showClass = showClicked.removeAttribute(showClass);
         showClass = showClicked.setAttribute("class", "card match show");
