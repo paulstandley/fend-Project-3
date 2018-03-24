@@ -77,16 +77,31 @@ function windowfuntion() {
  */
 
     newDeck.addEventListener("click", cardFun, true);
-
+    var numberOfClicks = 1;
     function cardFun(evt) {
+        
         let placeClicked = evt.target;
         console.log(placeClicked);
         placeClicked.addEventListener("click", clickCounterMoves);
         console.log(placeClicked.hasAttribute("id"));
         if(placeClicked.hasAttribute("id")) {
+               
+            if(numberOfClicks) {
 
-            let clickedIcon = placeClicked.getElementsByTagName("i");
-            console.log(clickedIcon[0]); 
+                firstClick(placeClicked);
+                
+            }else if(!numberOfClicks) {
+
+                let placeClicked_2 = evt.target;
+                let clickedIcon_2 = placeClicked_2.getElementsByTagName("i");
+                let clickedIcon_2Class = clickedIcon_2[0].getAttribute("class");
+                console.log(placeClicked);
+                console.log(clickedIcon_2Class);
+
+            }
+            
+            numberOfClicks = 0;
+        
         }
     }   
 // when you call it for a value -1 for the call because you called it
@@ -100,6 +115,17 @@ function windowfuntion() {
     var number = 1;
     var timer;
     var timer_is_on = 0;
+
+    function firstClick(placeClicked) {
+        let clickedIcon_1 = placeClicked.getElementsByTagName("i");
+        let clickedIcon_1Class = clickedIcon_1[0].getAttribute("class");
+        console.log(clickedIcon_1Class);
+        let showClicked = placeClicked;
+        console.log(showClicked);
+        let showClass = showClicked.getAttribute("class");
+        showClass = showClicked.removeAttribute(showClass);
+        showClass = showClicked.setAttribute("class", "card match show");
+    }
 
     function timedCount() {
         document.getElementById("timeSpan").innerHTML = ` TIME: ${number}`;
