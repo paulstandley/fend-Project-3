@@ -86,7 +86,7 @@ function windowfuntion() {
         if(placeClicked.hasAttribute("id")) {
 
             let clickedIcon = placeClicked.getElementsByTagName("i");
-            console.log(clickedIcon); 
+            console.log(clickedIcon[0]); 
         }
     }   
 // when you call it for a value -1 for the call because you called it
