@@ -15,6 +15,7 @@ function windowfuntion() {
     const restart = document.querySelector(".restart");
     const newDeck = document.querySelector(".deck");
     
+    
 
 
 /*
@@ -77,15 +78,49 @@ function windowfuntion() {
  */
 
     newDeck.addEventListener("click", cardFun, true);
-    var numberOfClicks = 1;
+    var id_check_array = [];
+    var numberOfClicks = [];
     function cardFun(evt) {
         
-        let placeClicked = evt.target;
+        var placeClicked = evt.target;
+        if(placeClicked.hasAttribute("id")) {
+            let clickedIcon_1 = placeClicked.getElementsByTagName("i");
+            let clickedIcon_1Class = clickedIcon_1[0].getAttribute("class");
+            numberOfClicks.push(clickedIcon_1Class);
+            console.log(numberOfClicks);
+            if(numberOfClicks.length == 1) {
+                firstClick(placeClicked);
+                var id_check_1 = placeClicked.getAttribute("id");
+                id_check_array.push(id_check_1);
+                console.log(id_check_1);
+            }else if(numberOfClicks.length == 2) {
+                secondClick(placeClicked);
+                var id_check_2 = placeClicked.getAttribute("id");
+                console.log(numberOfClicks[0] == numberOfClicks[1]);
+                console.log(id_check_array[0] != id_check_2);
+                 if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] != id_check_2)) {
+                    rightfunction(placeClicked, numberOfClicks);                        
+
+                 }
+                var poped = numberOfClicks.pop();
+                 poped = numberOfClicks.pop();
+                 poped = id_check_array.pop();
+                 poped = [];
+                 
+            }
+        }
+       /* 
+        let placeClickled = evt.target;
         console.log(placeClicked);
         placeClicked.addEventListener("click", clickCounterMoves);
         console.log(placeClicked.hasAttribute("id"));
         if(placeClicked.hasAttribute("id")) {
-               
+               switch(numberOfClicks) {
+                    case numberOfClicks == 1: firstClick(placeClicked);
+                    break;
+                    case numberOfClicks == 2: secondClick();
+                    break; 
+               }
             if(numberOfClicks) {
 
                 firstClick(placeClicked);
@@ -93,6 +128,7 @@ function windowfuntion() {
                 var compareValue = compare[0].getAttribute("class");
                 console.log(compareValue);
             }else if(!numberOfClicks) {
+
 
                 let placeClicked_2 = evt.target;
                 let clickedIcon_2 = placeClicked_2.getElementsByTagName("i");
@@ -107,8 +143,8 @@ function windowfuntion() {
             }
             
             numberOfClicks = 0;
+        */
         
-        }
     }   
 // when you call it for a value -1 for the call because you called it
     var keepCountMoves = 0;
@@ -122,13 +158,25 @@ function windowfuntion() {
     var timer;
     var timer_is_on = 0;
 
-    function firstClick(placeClicked) {
-        let clickedIcon_1 = placeClicked.getElementsByTagName("i");
-        let clickedIcon_1Class = clickedIcon_1[0].getAttribute("class");
-        let showClicked = placeClicked;
-        let showClass = showClicked.getAttribute("class");
-        showClass = showClicked.removeAttribute(showClass);
-        showClass = showClicked.setAttribute("class", "card match show");
+    function firstClick(placeClicked) { 
+        let showFirstClicked = placeClicked;
+        let showFirstClass = showFirstClicked.getAttribute("class");
+        showFirstClass = showFirstClicked.removeAttribute(showFirstClass);
+        showFirstClass = showFirstClicked.setAttribute("class", "card match show");
+    }
+
+    function secondClick(placeClicked) {
+        let showSecondClicked = placeClicked;
+        let showSecondClass = showSecondClicked.getAttribute("class");
+        showSecondClass = showSecondClicked.removeAttribute(showSecondClass);
+        showSecondClass = showSecondClicked.setAttribute("class", "card match show");
+    }
+
+    function rightfunction(placeClicked, numberOfClicks) {
+        let rightClicked = placeClicked;
+        let rightClass = rightClicked.getAttribute("class");
+        rightClass = rightClicked.removeAttribute(rightClass);
+        rightClass = rightClicked.setAttribute("class", "card open show");
     }
 
     function timedCount() {
