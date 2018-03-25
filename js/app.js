@@ -14,10 +14,7 @@ function windowfuntion() {
     const movesMade = document.querySelector(".moves");
     const restart = document.querySelector(".restart");
     const newDeck = document.querySelector(".deck");
-    
-    
-
-
+    var keepCountMoves = 0;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -28,7 +25,6 @@ function windowfuntion() {
     var bool = true;
     function resetFun() {
         
-
         shuffleFunction();
         if(bool) {
             startCount();
@@ -81,45 +77,50 @@ function windowfuntion() {
     var id_check_array = [];
     var numberOfClicks = [];
     function cardFun(evt) {
-        
+//  get click location
         var placeClicked = evt.target;
         if(placeClicked.hasAttribute("id")) {
+//  get the values of dom for comparison push to keep hold of value
+            clickCounterMoves();
             let clickedIcon_1 = placeClicked.getElementsByTagName("i");
             let clickedIcon_1Class = clickedIcon_1[0].getAttribute("class");
             numberOfClicks.push(clickedIcon_1Class);
-            console.log(numberOfClicks);
+//  first click event push to regester click           
             if(numberOfClicks.length == 1) {
                 firstClick(placeClicked);
                 var id_check_1 = placeClicked.getAttribute("id");
                 id_check_array.push(id_check_1);
                 console.log(id_check_1);
+//  second click event 
             }else if(numberOfClicks.length == 2) {
                 secondClick(placeClicked);
                 var id_check_2 = placeClicked.getAttribute("id");
                 console.log(numberOfClicks[0] == numberOfClicks[1]);
                 console.log(id_check_array[0] != id_check_2);
+// compare vales form dom and array 
                 if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] != id_check_2)) {
                     rightFunction(placeClicked, id_check_array);                        
-
                 }else{
-
-                wrongFunction(placeClicked, id_check_array);
+                    wrongFunction(placeClicked, id_check_array);
                 }
+//  pop arrays to start from one
                 var poped = numberOfClicks.pop();
                  poped = numberOfClicks.pop();
                  poped = id_check_array.pop();
-                 poped = [];
-                 
+                 poped = [];       
             }
         }
-        
     }   
 // when you call it for a value -1 for the call because you called it
-    var keepCountMoves = 0;
-    var clickCounterMoves = function(){
-        keepCountMoves++
+    
+    function clickCounterMoves(){
+        keepCountMoves++;
+        let displayMoves = document.getElementById("movesMade");
+        displayMoves.innerHTML = ` ${keepCountMoves} `;
         return keepCountMoves;
-    } 
+    }
+    
+    
 
 /* got help from https://www.w3schools.com/jsref/met_win_cleartimeout.asp  */    
     var number = 1;
@@ -155,9 +156,6 @@ function windowfuntion() {
     function wrongFunction(placeClicked, id_check_array) {
         
         let wrongIdElement = document.getElementById(id_check_array[0]);
-        console.log(wrongIdElement);// underfined
-        console.log(placeClicked);
-        console.log(id_check_array[0]);//underfined
         let wrongIdElementClass = wrongIdElement.getAttribute("class");
         wrongIdElementClass = wrongIdElement.removeAttribute(wrongIdElementClass);
         wrongIdElementClass = wrongIdElement.setAttribute("class", "card open");
@@ -166,7 +164,8 @@ function windowfuntion() {
         wrongClass = wrongClicked.removeAttribute(wrongClass);
         wrongClass = wrongClicked.setAttribute("class", "card open");
         
-    };
+    }
+
 
     function timedCount() {
         document.getElementById("timeSpan").innerHTML = ` TIME: ${number}`;
