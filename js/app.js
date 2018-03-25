@@ -98,10 +98,13 @@ function windowfuntion() {
                 var id_check_2 = placeClicked.getAttribute("id");
                 console.log(numberOfClicks[0] == numberOfClicks[1]);
                 console.log(id_check_array[0] != id_check_2);
-                 if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] != id_check_2)) {
-                    rightfunction(placeClicked, numberOfClicks);                        
+                if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] != id_check_2)) {
+                    rightFunction(placeClicked, id_check_array);                        
 
-                 }
+                }else{
+
+                wrongFunction(placeClicked, id_check_array);
+                }
                 var poped = numberOfClicks.pop();
                  poped = numberOfClicks.pop();
                  poped = id_check_array.pop();
@@ -109,41 +112,6 @@ function windowfuntion() {
                  
             }
         }
-       /* 
-        let placeClickled = evt.target;
-        console.log(placeClicked);
-        placeClicked.addEventListener("click", clickCounterMoves);
-        console.log(placeClicked.hasAttribute("id"));
-        if(placeClicked.hasAttribute("id")) {
-               switch(numberOfClicks) {
-                    case numberOfClicks == 1: firstClick(placeClicked);
-                    break;
-                    case numberOfClicks == 2: secondClick();
-                    break; 
-               }
-            if(numberOfClicks) {
-
-                firstClick(placeClicked);
-                var compare = placeClicked.getElementsByTagName("i");
-                var compareValue = compare[0].getAttribute("class");
-                console.log(compareValue);
-            }else if(!numberOfClicks) {
-
-
-                let placeClicked_2 = evt.target;
-                let clickedIcon_2 = placeClicked_2.getElementsByTagName("i");
-                let clickedIcon_2Class = clickedIcon_2[0].getAttribute("class");
-                // comapere value unefined
-                    console.log(compareValue);
-                if(compareValue == clickedIcon_2Class) {
-                    console.log("clicked");
-                }
-                console.log(clickedIcon_2Class);
-
-            }
-            
-            numberOfClicks = 0;
-        */
         
     }   
 // when you call it for a value -1 for the call because you called it
@@ -172,12 +140,33 @@ function windowfuntion() {
         showSecondClass = showSecondClicked.setAttribute("class", "card match show");
     }
 
-    function rightfunction(placeClicked, numberOfClicks) {
+    function rightFunction(placeClicked, id_check_array) {
+
+        let rightIdElement = document.getElementById(id_check_array[0]);
+        let rightIdElementClass = rightIdElement.getAttribute("class");
+        rightIdElementClass = rightIdElement.removeAttribute(rightIdElementClass);
+        rightIdElementClass = rightIdElement.setAttribute("class", "card open show");
         let rightClicked = placeClicked;
         let rightClass = rightClicked.getAttribute("class");
         rightClass = rightClicked.removeAttribute(rightClass);
         rightClass = rightClicked.setAttribute("class", "card open show");
     }
+
+    function wrongFunction(placeClicked, id_check_array) {
+        
+        let wrongIdElement = document.getElementById(id_check_array[0]);
+        console.log(wrongIdElement);// underfined
+        console.log(placeClicked);
+        console.log(id_check_array[0]);//underfined
+        let wrongIdElementClass = wrongIdElement.getAttribute("class");
+        wrongIdElementClass = wrongIdElement.removeAttribute(wrongIdElementClass);
+        wrongIdElementClass = wrongIdElement.setAttribute("class", "card open");
+        let wrongClicked = placeClicked;
+        let wrongClass = wrongClicked.getAttribute("class");
+        wrongClass = wrongClicked.removeAttribute(wrongClass);
+        wrongClass = wrongClicked.setAttribute("class", "card open");
+        
+    };
 
     function timedCount() {
         document.getElementById("timeSpan").innerHTML = ` TIME: ${number}`;
