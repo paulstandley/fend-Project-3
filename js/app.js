@@ -196,6 +196,10 @@ function windowfuntion() {
         stopCount();
         modal.style.display = "block";
     }
+    modal.querySelector(".endGame").addEventListener("click", closeModel);
+    function closeModel() {
+        modal.style.display = "none";
+    }
 
 //end off widow function
 }
