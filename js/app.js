@@ -14,6 +14,8 @@ function windowfuntion() {
     const movesMade = document.querySelector(".moves");
     const restart = document.querySelector(".restart");
     const newDeck = document.querySelector(".deck");
+    const starsCount = document.getElementsByClassName("stars");
+    
     var keepCountMoves = 0;
 /*
  * Display the cards on the page
@@ -74,6 +76,7 @@ function windowfuntion() {
  */
 
     newDeck.addEventListener("click", cardFun, true);
+    var keepScore = [];
     var id_check_array = [];
     var numberOfClicks = [];
     function cardFun(evt) {
@@ -95,11 +98,14 @@ function windowfuntion() {
             }else if(numberOfClicks.length == 2) {
                 secondClick(placeClicked);
                 var id_check_2 = placeClicked.getAttribute("id");
-                console.log(numberOfClicks[0] == numberOfClicks[1]);
-                console.log(id_check_array[0] != id_check_2);
 // compare vales form dom and array 
                 if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] != id_check_2)) {
-                    rightFunction(placeClicked, id_check_array);                        
+                    rightFunction(placeClicked, id_check_array);
+                        keepScore.push(true);
+                        if(keepScore.length == 8) {
+                            callModel();
+                            // winner 
+                        }                        
                 }else{
                     wrongFunction(placeClicked, id_check_array);
                 }
@@ -185,6 +191,9 @@ function windowfuntion() {
         timer_is_on = 0;
     }
 
+    function callModel() {
+        stopCount();
+    }
 
 //end off widow function
 }
