@@ -114,6 +114,39 @@ h2 {
     padding-right: 0.2rem;
 }
 
+.classModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(3, 3, 3, 0.3);
+}
+
+.modalContent {
+    background-color: rgba(60, 62, 92, 0.8);
+    margin: 20% auto;
+    padding: 2rem;
+    width: 70%;
+}
+
+.endGame {
+    color: rgb(211, 197, 245);
+    float: right;
+    font-size: 1.8rem;
+}
+
+.endGame:hover {
+    color: rgba(30, 31, 32, 0.9);
+    background-color: plum;
+    float: right;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
 #startReset {
     float: right;
 }

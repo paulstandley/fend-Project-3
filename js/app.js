@@ -15,6 +15,7 @@ function windowfuntion() {
     const restart = document.querySelector(".restart");
     const newDeck = document.querySelector(".deck");
     const starsCount = document.getElementsByClassName("stars");
+    const modal = document.getElementById("idModal");
     
     var keepCountMoves = 0;
 /*
@@ -193,6 +194,7 @@ function windowfuntion() {
 
     function callModel() {
         stopCount();
+        modal.style.display = "block";
     }
 
 //end off widow function
