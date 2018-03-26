@@ -147,6 +147,17 @@ h2 {
     cursor: pointer;
 }
 
+.templateButton {
+    color: orangered;
+    background-color: navy;
+    font-size: 2.2rem;
+}
+
+.template {
+    text-align: center;
+    color: mediumvioletred;
+}
+
 #startReset {
     float: right;
 }

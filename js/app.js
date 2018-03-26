@@ -16,7 +16,7 @@ function windowfuntion() {
     const newDeck = document.querySelector(".deck");
     const starsCount = document.getElementsByClassName("stars");
     const modal = document.getElementById("idModal");
-    
+    const replayButton = document.getElementById("reStartButton"); 
     var keepCountMoves = 0;
 /*
  * Display the cards on the page
@@ -24,10 +24,12 @@ function windowfuntion() {
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+    replayButton.addEventListener("click", function(){
+        resetFun(); });
     restart.addEventListener("click", resetFun);
     var bool = true;
-    function resetFun() {
-        
+    
+    function resetFun() {        
         shuffleFunction();
         if(bool) {
             startCount();
@@ -36,8 +38,7 @@ function windowfuntion() {
             window.location.reload(false);
         }
         bool = false;
-        
-        }
+    }
     
     function shuffleFunction() {
         const shuffledCards = shuffle(iconArrayHolder);
@@ -169,10 +170,8 @@ function windowfuntion() {
         let wrongClicked = placeClicked;
         let wrongClass = wrongClicked.getAttribute("class");
         wrongClass = wrongClicked.removeAttribute(wrongClass);
-        wrongClass = wrongClicked.setAttribute("class", "card open");
-        
+        wrongClass = wrongClicked.setAttribute("class", "card open");       
     }
-
 
     function timedCount() {
         document.getElementById("timeSpan").innerHTML = ` TIME: ${number}`;
@@ -194,9 +193,15 @@ function windowfuntion() {
 
     function callModel() {
         stopCount();
+        let displayScore = document.getElementById("displayModal");
+        displayScore.innerHTML = `<div class="template"><h2>Your Score</h2><span><h3>Second's Taken <strong>${keepCountMoves}</strong> Number of click's <strong>${number-1}</strong> Star's left ?</h3></span></div>`;
         modal.style.display = "block";
     }
+
+
+
     modal.querySelector(".endGame").addEventListener("click", closeModel);
+
     function closeModel() {
         modal.style.display = "none";
     }
