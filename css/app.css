@@ -36,6 +36,9 @@ h1 {
 h2 {
     font-weight: 300;
 }
+strong {
+    color: linen;
+}
 
 /*
  * Styles for the deck of cards
@@ -156,6 +159,10 @@ h2 {
 .template {
     text-align: center;
     color: mediumvioletred;
+}
+
+.blackStar {
+    color: rgb(15, 43, 26);
 }
 
 #startReset {

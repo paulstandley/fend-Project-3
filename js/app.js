@@ -24,8 +24,7 @@ function windowfuntion() {
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-    replayButton.addEventListener("click", function(){
-        resetFun(); });
+    replayButton.addEventListener("click", function(){ resetFun() });
     restart.addEventListener("click", resetFun);
     var bool = true;
     
@@ -106,7 +105,7 @@ function windowfuntion() {
                         keepScore.push(true);
                         if(keepScore.length == 8) {
                             callModel();
-                            // winner 
+                            // winner ?
                         }                        
                 }else{
                     wrongFunction(placeClicked, id_check_array);
@@ -120,16 +119,12 @@ function windowfuntion() {
         }
     }   
 // when you call it for a value -1 for the call because you called it
-    
     function clickCounterMoves(){
         keepCountMoves++;
         let displayMoves = document.getElementById("movesMade");
         displayMoves.innerHTML = ` ${keepCountMoves} `;
         return keepCountMoves;
     }
-    
-    
-
 /* got help from https://www.w3schools.com/jsref/met_win_cleartimeout.asp  */    
     var number = 1;
     var timer;
@@ -150,7 +145,6 @@ function windowfuntion() {
     }
 
     function rightFunction(placeClicked, id_check_array) {
-
         let rightIdElement = document.getElementById(id_check_array[0]);
         let rightIdElementClass = rightIdElement.getAttribute("class");
         rightIdElementClass = rightIdElement.removeAttribute(rightIdElementClass);
@@ -162,7 +156,6 @@ function windowfuntion() {
     }
 
     function wrongFunction(placeClicked, id_check_array) {
-        
         let wrongIdElement = document.getElementById(id_check_array[0]);
         let wrongIdElementClass = wrongIdElement.getAttribute("class");
         wrongIdElementClass = wrongIdElement.removeAttribute(wrongIdElementClass);
@@ -177,6 +170,7 @@ function windowfuntion() {
         document.getElementById("timeSpan").innerHTML = ` TIME: ${number}`;
         timer = setTimeout(function(){timedCount()}, 1000);
         number++;
+        removeStars();
     }
 
     function startCount() {
@@ -191,14 +185,42 @@ function windowfuntion() {
         timer_is_on = 0;
     }
 
-    function callModel() {
-        stopCount();
-        let displayScore = document.getElementById("displayModal");
-        displayScore.innerHTML = `<div class="template"><h2>Your Score</h2><span><h3>Second's Taken <strong>${keepCountMoves}</strong> Number of click's <strong>${number-1}</strong> Star's left ?</h3></span></div>`;
-        modal.style.display = "block";
+    function removeStars() {
+        if(number  == 45) {
+            let takeDown1Star = document.getElementById("firstStar");
+            let takeDown1Class = takeDown1Star.getAttribute("class");
+            takeDown1Class = takeDown1Star.removeAttribute(takeDown1Class);
+            takeDown1Class = takeDown1Star.setAttribute("class", "fa fa-star blackStar");
+        }else if(number == 60) {
+            let takeDown2Star = document.getElementById("secondStar");
+            let takeDown2Class = takeDown2Star.getAttribute("class");
+            takeDown2Class = takeDown2Star.removeAttribute(takeDown2Class);
+            takeDown2Class = takeDown2Star.setAttribute("class", "fa fa-star blackStar");    
+        }else if(number == 80) {
+            let takeDown3Star = document.getElementById("thirdStar");
+            let takeDown3Class = takeDown3Star.getAttribute("class");
+            takeDown3Class = takeDown3Star.removeAttribute(takeDown3Class);
+            takeDown3Class = takeDown3Star.setAttribute("class", "fa fa-star blackStar");
+        }
     }
 
-
+    function callModel() {
+    
+        let valueStars = "Three Stars";
+        if(number > 45) {
+        valueStars = "Two Stars";
+        }
+        if(number > 60) {
+        valueStars = "One Stars";
+        }
+        if(number > 80){
+        valueStars = "No Stars";
+        }
+        stopCount();
+        let displayScore = document.getElementById("displayModal");
+        displayScore.innerHTML = `<div class="template"><h2>Congratulations, Your Score</h2><span><h3>Second's Taken <strong>${number-1}</strong></h3><h3> Number of click's <strong>${keepCountMoves}</strong></h3><h3>You Have <strong>${valueStars}</strong></h3></span></div>`;
+        modal.style.display = "block";
+    }
 
     modal.querySelector(".endGame").addEventListener("click", closeModel);
 
