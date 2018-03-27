@@ -18,6 +18,7 @@ function windowfuntion() {
     const modal = document.getElementById("idModal");
     const replayButton = document.getElementById("reStartButton"); 
     var keepCountMoves = 0;
+    var passed_values_for_id_array = [];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -26,17 +27,11 @@ function windowfuntion() {
  */
     replayButton.addEventListener("click", function(){ resetFun() });
     restart.addEventListener("click", resetFun);
-    var bool = true;
     
-    function resetFun() {        
+    function resetFun() {
+        window.location.reload(false);        
         shuffleFunction();
-        if(bool) {
-            startCount();
-        }else{
-            stopCount();
-            window.location.reload(false);
-        }
-        bool = false;
+        stopCount();
     }
     
     function shuffleFunction() {
@@ -83,8 +78,10 @@ function windowfuntion() {
     function cardFun(evt) {
 //  get click location
         var placeClicked = evt.target;
+// make sure click is on tiles        
         if(placeClicked.hasAttribute("id")) {
 //  get the values of dom for comparison push to keep hold of value
+            startCount();
             clickCounterMoves();
             let clickedIcon_1 = placeClicked.getElementsByTagName("i");
             let clickedIcon_1Class = clickedIcon_1[0].getAttribute("class");
@@ -94,20 +91,26 @@ function windowfuntion() {
                 firstClick(placeClicked);
                 var id_check_1 = placeClicked.getAttribute("id");
                 id_check_array.push(id_check_1);
-                console.log(id_check_1);
 //  second click event 
             }else if(numberOfClicks.length == 2) {
                 secondClick(placeClicked);
                 var id_check_2 = placeClicked.getAttribute("id");
 // compare vales form dom and array 
-                if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] != id_check_2)) {
+                if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] !=  id_check_2)) {
+                    passed_values_for_id_array.push(id_check_array[0]);
+                    passed_values_for_id_array.push(id_check_2);
+                    console.log(passed_values_for_id_array);
+// test to make sure tiles that have passed don't get clicked                    
+                    for(let i = 0; i > passed_values_for_id_array.length; i++) {
+                        // next to do
+                    }
                     rightFunction(placeClicked, id_check_array);
-                        keepScore.push(true);
-                        if(keepScore.length == 8) {
-                            callModel();
-                            // winner ?
-                        }                        
-                }else{
+                    keepScore.push(true);
+                    if(keepScore.length == 8) {
+                        callModel();
+                        // winner ?
+                    }                        
+                    }else{
                     wrongFunction(placeClicked, id_check_array);
                 }
 //  pop arrays to start from one
