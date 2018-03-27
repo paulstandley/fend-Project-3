@@ -19,6 +19,13 @@ function windowfuntion() {
     const replayButton = document.getElementById("reStartButton"); 
     var keepCountMoves = 0;
     var passed_values_for_id_array = [];
+    var keepScore = [];
+    var id_check_array = [];
+    var numberOfClicks = [];
+    var id_check_1;
+    var id_check_2;
+    var placeClicked;
+    var bool = true;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -27,12 +34,18 @@ function windowfuntion() {
  */
     replayButton.addEventListener("click", function(){ resetFun() });
     restart.addEventListener("click", resetFun);
-    
+
     function resetFun() {
-        window.location.reload(false);        
         shuffleFunction();
-        stopCount();
+        if (bool) {
+            startCount();
+        } else {
+            stopCount();
+            window.location.reload(false);
+        }
+        bool = false;
     }
+    
     
     function shuffleFunction() {
         const shuffledCards = shuffle(iconArrayHolder);
@@ -69,18 +82,15 @@ function windowfuntion() {
  *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
+ */ 
     newDeck.addEventListener("click", cardFun, true);
-    var keepScore = [];
-    var id_check_array = [];
-    var numberOfClicks = [];
+    
     function cardFun(evt) {
 //  get click location
-        var placeClicked = evt.target;
+        placeClicked = evt.target;
 // make sure click is on tiles        
         if(placeClicked.hasAttribute("id")) {
-//  get the values of dom for comparison push to keep hold of value
+//  get the values of dom for comparison push to keep hold of values
             startCount();
             clickCounterMoves();
             let clickedIcon_1 = placeClicked.getElementsByTagName("i");
@@ -89,20 +99,26 @@ function windowfuntion() {
 //  first click event push to regester click           
             if(numberOfClicks.length == 1) {
                 firstClick(placeClicked);
-                var id_check_1 = placeClicked.getAttribute("id");
+                id_check_1 = placeClicked.getAttribute("id");
                 id_check_array.push(id_check_1);
+                console.log("First click");
 //  second click event 
             }else if(numberOfClicks.length == 2) {
                 secondClick(placeClicked);
-                var id_check_2 = placeClicked.getAttribute("id");
+                id_check_2 = placeClicked.getAttribute("id");
+                id_check_array.push(id_check_2);
+                console.log("Second click");
 // compare vales form dom and array 
                 if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] !=  id_check_2)) {
                     passed_values_for_id_array.push(id_check_array[0]);
                     passed_values_for_id_array.push(id_check_2);
-                    console.log(passed_values_for_id_array);
-// test to make sure tiles that have passed don't get clicked                    
-                    for(let i = 0; i > passed_values_for_id_array.length; i++) {
-                        // next to do
+// test to make sure tiles that have passed don't get clicked  
+                    
+                    for(let i = 0; i < passed_values_for_id_array.length; i++) {
+                        if(id_check_array[0] == passed_values_for_id_array[i]) {
+                         console.log("Id array "+i+" :"+ id_check_array[1]+" "+passed_values_for_id_array[i]);
+                        }
+                        console.log(passed_values_for_id_array[i]);
                     }
                     rightFunction(placeClicked, id_check_array);
                     keepScore.push(true);
@@ -115,9 +131,10 @@ function windowfuntion() {
                 }
 //  pop arrays to start from one
                 var poped = numberOfClicks.pop();
-                 poped = numberOfClicks.pop();
-                 poped = id_check_array.pop();
-                 poped = [];       
+                poped = numberOfClicks.pop();
+                poped = id_check_array.pop();
+                poped = id_check_array.pop();
+                poped = [];       
             }
         }
     }   
@@ -150,23 +167,27 @@ function windowfuntion() {
     function rightFunction(placeClicked, id_check_array) {
         let rightIdElement = document.getElementById(id_check_array[0]);
         let rightIdElementClass = rightIdElement.getAttribute("class");
-        rightIdElementClass = rightIdElement.removeAttribute(rightIdElementClass);
-        rightIdElementClass = rightIdElement.setAttribute("class", "card open show");
         let rightClicked = placeClicked;
         let rightClass = rightClicked.getAttribute("class");
+        setTimeout(function(){
+        rightIdElementClass = rightIdElement.removeAttribute(rightIdElementClass);
+        rightIdElementClass = rightIdElement.setAttribute("class", "card open show")  
         rightClass = rightClicked.removeAttribute(rightClass);
         rightClass = rightClicked.setAttribute("class", "card open show");
+        },1000);
     }
 
     function wrongFunction(placeClicked, id_check_array) {
         let wrongIdElement = document.getElementById(id_check_array[0]);
         let wrongIdElementClass = wrongIdElement.getAttribute("class");
-        wrongIdElementClass = wrongIdElement.removeAttribute(wrongIdElementClass);
-        wrongIdElementClass = wrongIdElement.setAttribute("class", "card open");
         let wrongClicked = placeClicked;
         let wrongClass = wrongClicked.getAttribute("class");
+        setTimeout(function(){        
+        wrongIdElementClass = wrongIdElement.removeAttribute(wrongIdElementClass);
+        wrongIdElementClass = wrongIdElement.setAttribute("class", "card open");
         wrongClass = wrongClicked.removeAttribute(wrongClass);
         wrongClass = wrongClicked.setAttribute("class", "card open");       
+        },1000);    
     }
 
     function timedCount() {
