@@ -32,18 +32,14 @@ function windowfuntion() {
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+    shuffleFunction();
+
     replayButton.addEventListener("click", function(){ resetFun() });
     restart.addEventListener("click", resetFun);
 
     function resetFun() {
-        shuffleFunction();
-        if (bool) {
-            startCount();
-        } else {
             stopCount();
             window.location.reload(false);
-        }
-        bool = false;
     }
     
     
@@ -84,8 +80,9 @@ function windowfuntion() {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */ 
     newDeck.addEventListener("click", cardFun, true);
-    
+    var if_clicked_correct;    
     function cardFun(evt) {
+        if_clicked_correct = false;
 //  get click location
         placeClicked = evt.target;
 // make sure click is on tiles        
@@ -96,36 +93,42 @@ function windowfuntion() {
             let clickedIcon_1 = placeClicked.getElementsByTagName("i");
             let clickedIcon_1Class = clickedIcon_1[0].getAttribute("class");
             numberOfClicks.push(clickedIcon_1Class);
-//  first click event push to regester click           
+            forLoopFunction();    
+//  first click event push to regester click and check vales off passed values   
+console.log(numberOfClicks.length == 1);
+console.log(if_clicked_correct);   
             if(numberOfClicks.length == 1) {
                 firstClick(placeClicked);
                 id_check_1 = placeClicked.getAttribute("id");
                 id_check_array.push(id_check_1);
                 console.log("First click");
+                if(if_clicked_correct) {
+                    console.log("INsind first click value: " + if_clicked_correct);
+                }
 //  second click event 
             }else if(numberOfClicks.length == 2) {
                 secondClick(placeClicked);
                 id_check_2 = placeClicked.getAttribute("id");
                 id_check_array.push(id_check_2);
                 console.log("Second click");
+                if(if_clicked_correct) {
+                    console.log("Inside second click value: " + if_clicked_correct);
+                }
 // compare vales form dom and array 
                 if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] !=  id_check_2)) {
                     passed_values_for_id_array.push(id_check_array[0]);
                     passed_values_for_id_array.push(id_check_2);
-// test to make sure tiles that have passed don't get clicked  
-                    
-                    for(let i = 0; i < passed_values_for_id_array.length; i++) {
-                        if(id_check_array[0] == passed_values_for_id_array[i]) {
-                         console.log("Id array "+i+" :"+ id_check_array[1]+" "+passed_values_for_id_array[i]);
-                        }
-                        console.log(passed_values_for_id_array[i]);
-                    }
-                    rightFunction(placeClicked, id_check_array);
+// test to make sure tiles that have passed don't get clicked 
                     keepScore.push(true);
-                    if(keepScore.length == 8) {
-                        callModel();
-                        // winner ?
-                    }                        
+                    if(if_clicked_correct) {
+                        wrongFunction(placeClicked, id_check_array);
+                    }    
+                        if(keepScore.length == 8) {
+                            callModel();
+                            // winner ?
+                        }
+                    
+                    rightFunction(placeClicked, id_check_array);                        
                     }else{
                     wrongFunction(placeClicked, id_check_array);
                 }
@@ -137,7 +140,16 @@ function windowfuntion() {
                 poped = [];       
             }
         }
+        reset_fall_wrong(placeClicked , id_check_array, passed_values_for_id_array);
     }   
+    function forLoopFunction() {
+        for (let i = 0; i < passed_values_for_id_array.length; i++) {
+            if (id_check_1 == passed_values_for_id_array[i]) {
+                if_clicked_correct = true;
+            }
+        }
+    }
+
 // when you call it for a value -1 for the call because you called it
     function clickCounterMoves(){
         keepCountMoves++;
@@ -170,10 +182,10 @@ function windowfuntion() {
         let rightClicked = placeClicked;
         let rightClass = rightClicked.getAttribute("class");
         setTimeout(function(){
-        rightIdElementClass = rightIdElement.removeAttribute(rightIdElementClass);
-        rightIdElementClass = rightIdElement.setAttribute("class", "card open show")  
-        rightClass = rightClicked.removeAttribute(rightClass);
-        rightClass = rightClicked.setAttribute("class", "card open show");
+            rightIdElementClass = rightIdElement.removeAttribute(rightIdElementClass);
+            rightIdElementClass = rightIdElement.setAttribute("class", "card open show")  
+            rightClass = rightClicked.removeAttribute(rightClass);
+            rightClass = rightClicked.setAttribute("class", "card open show");
         },1000);
     }
 
@@ -183,10 +195,10 @@ function windowfuntion() {
         let wrongClicked = placeClicked;
         let wrongClass = wrongClicked.getAttribute("class");
         setTimeout(function(){        
-        wrongIdElementClass = wrongIdElement.removeAttribute(wrongIdElementClass);
-        wrongIdElementClass = wrongIdElement.setAttribute("class", "card open");
-        wrongClass = wrongClicked.removeAttribute(wrongClass);
-        wrongClass = wrongClicked.setAttribute("class", "card open");       
+            wrongIdElementClass = wrongIdElement.removeAttribute(wrongIdElementClass);
+            wrongIdElementClass = wrongIdElement.setAttribute("class", "card open");
+            wrongClass = wrongClicked.removeAttribute(wrongClass);
+            wrongClass = wrongClicked.setAttribute("class", "card open");       
         },1000);    
     }
 
@@ -228,8 +240,7 @@ function windowfuntion() {
         }
     }
 
-    function callModel() {
-    
+    function callModel() {   
         let valueStars = "Three Stars";
         if(number > 45) {
         valueStars = "Two Stars";
@@ -244,6 +255,34 @@ function windowfuntion() {
         let displayScore = document.getElementById("displayModal");
         displayScore.innerHTML = `<div class="template"><h2>Congratulations, Your Score</h2><span><h3>Second's Taken <strong>${number-1}</strong></h3><h3> Number of click's <strong>${keepCountMoves}</strong></h3><h3>You Have <strong>${valueStars}</strong></h3></span></div>`;
         modal.style.display = "block";
+    }
+
+    function reset_fall_wrong(placeClicked, id_check_array, passed_values_for_id_array) {
+        console.log(passed_values_for_id_array);
+        console.log(id_check_array);
+        console.log(placeClicked);
+        if(passed_values_for_id_array == undefined && passed_values_for_id_array == null && id_check_array[0] == undefined && id_check_array[0] == null && id_check_array[1] == undefined && id_check_array[1] == null) {
+            alert("got throw all condisionals");
+        }else{
+        for(let i = 0; i < passed_values_for_id_array.length; i++) {
+            console.log(passed_values_for_id_array[i]);
+            if(id_check_array[1] == passed_values_for_id_array[i]) {
+                console.log("if passed");
+                console.log(id_check_array);
+                let wrongIdElement = document.getElementById(id_check_array[1]);
+                console.log(wrongIdElement);
+                let wrongIdElementClass = wrongIdElement.getAttribute("class");
+                let wrongClicked = placeClicked;
+                let wrongClass = wrongClicked.getAttribute("class");
+                setTimeout(function(){        
+                    wrongIdElementClass = wrongIdElement.removeAttribute(wrongIdElementClass);
+                    wrongIdElementClass = wrongIdElement.setAttribute("class", "card open show");
+                    wrongClass = wrongClicked.removeAttribute(wrongClass);
+                    wrongClass = wrongClicked.setAttribute("class", "card open show");       
+                },1100);
+            }
+        }
+    }
     }
 
     modal.querySelector(".endGame").addEventListener("click", closeModel);
