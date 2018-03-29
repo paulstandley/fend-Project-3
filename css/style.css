@@ -44,8 +44,8 @@ strong {
 
 span {
     color: #aa7ecd;
-    font-size: 2.2rem;
-    padding: 0.4rem;
+    font-size: 1.4rem;
+    padding: 0;
 }
 
 /*
@@ -53,8 +53,8 @@ span {
  */
 
 .deck {
-    width: 826px;
-    min-height: 869px;
+    width: 794px;
+    min-height: 897px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 44px;
     border-radius: 10px;
@@ -67,8 +67,8 @@ span {
 }
 
 .deck .card {
-    height: 157px;
-    width: 157px;
+    height: 142px;
+    width: 142px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -101,11 +101,11 @@ span {
  */
 
  .stars {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
 }
 
 .restart {
-    font-size: 2.4rem;
+    font-size: 2rem;
     padding: 1rem 0.1rem;
     background-color: #02b3e4a8;
     border-radius: 43rem;
@@ -113,7 +113,7 @@ span {
 
 .score-panel {
     text-align: left;
-    width: 60%;
+    width: 40%;
     margin-bottom: 1rem;
     padding: 1rem;
 }
@@ -195,7 +195,3 @@ span {
 #goAway {
     display: none;
 }
-
-
-
-

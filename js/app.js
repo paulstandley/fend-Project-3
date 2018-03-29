@@ -95,24 +95,23 @@ function windowfuntion() {
             numberOfClicks.push(clickedIcon_1Class);
             forLoopFunction();    
 //  first click event push to regester click and check vales off passed values   
-console.log(numberOfClicks.length == 1);
-console.log(if_clicked_correct);   
+   
             if(numberOfClicks.length == 1) {
                 firstClick(placeClicked);
                 id_check_1 = placeClicked.getAttribute("id");
                 id_check_array.push(id_check_1);
-                console.log("First click");
+        
                 if(if_clicked_correct) {
-                    console.log("INsind first click value: " + if_clicked_correct);
+                
                 }
 //  second click event 
             }else if(numberOfClicks.length == 2) {
                 secondClick(placeClicked);
                 id_check_2 = placeClicked.getAttribute("id");
                 id_check_array.push(id_check_2);
-                console.log("Second click");
+                
                 if(if_clicked_correct) {
-                    console.log("Inside second click value: " + if_clicked_correct);
+                
                 }
 // compare vales form dom and array 
                 if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] !=  id_check_2)) {
@@ -258,14 +257,12 @@ console.log(if_clicked_correct);
     }
 
     function reset_fall_wrong(placeClicked, id_check_array, passed_values_for_id_array) {
-        console.log(passed_values_for_id_array);
-        console.log(id_check_array);
-        console.log(placeClicked);
+        
         if(passed_values_for_id_array == undefined && passed_values_for_id_array == null && id_check_array[0] == undefined && id_check_array[0] == null && id_check_array[1] == undefined && id_check_array[1] == null) {
-            alert("got throw all condisionals");
+            
         }else{
         for(let i = 0; i < passed_values_for_id_array.length; i++) {
-            console.log(passed_values_for_id_array[i]);
+    
             if(id_check_array[1] == passed_values_for_id_array[i]) {
                 console.log("if passed");
                 console.log(id_check_array);
