@@ -34,7 +34,7 @@ function windowfuntion() {
  */
     shuffleFunction();
 
-    replayButton.addEventListener("click", function(){ resetFun() });
+    replayButton.addEventListener("click", function(){ resetFun(); });
     restart.addEventListener("click", resetFun);
 
     function resetFun() {
@@ -182,7 +182,7 @@ function windowfuntion() {
         let rightClass = rightClicked.getAttribute("class");
         setTimeout(function(){
             rightIdElementClass = rightIdElement.removeAttribute(rightIdElementClass);
-            rightIdElementClass = rightIdElement.setAttribute("class", "card open show")  
+            rightIdElementClass = rightIdElement.setAttribute("class", "card open show");  
             rightClass = rightClicked.removeAttribute(rightClass);
             rightClass = rightClicked.setAttribute("class", "card open show");
         },1000);
@@ -203,7 +203,7 @@ function windowfuntion() {
 
     function timedCount() {
         document.getElementById("timeSpan").innerHTML = ` TIME: ${number}`;
-        timer = setTimeout(function(){timedCount()}, 1000);
+        timer = setTimeout(function(){ timedCount(); }, 1000);
         number++;
         removeStars();
     }
@@ -258,16 +258,14 @@ function windowfuntion() {
 
     function reset_fall_wrong(placeClicked, id_check_array, passed_values_for_id_array) {
         
-        if(passed_values_for_id_array == undefined && passed_values_for_id_array == null && id_check_array[0] == undefined && id_check_array[0] == null && id_check_array[1] == undefined && id_check_array[1] == null) {
+        if(passed_values_for_id_array === undefined && passed_values_for_id_array === null && id_check_array[0] === undefined && id_check_array[0] === null && id_check_array[1] === undefined && id_check_array[1] === null) {
             
         }else{
         for(let i = 0; i < passed_values_for_id_array.length; i++) {
     
             if(id_check_array[1] == passed_values_for_id_array[i]) {
-                console.log("if passed");
-                console.log(id_check_array);
+        /*  I should not put a funcion in a loop but I have run out off time  */
                 let wrongIdElement = document.getElementById(id_check_array[1]);
-                console.log(wrongIdElement);
                 let wrongIdElementClass = wrongIdElement.getAttribute("class");
                 let wrongClicked = placeClicked;
                 let wrongClass = wrongClicked.getAttribute("class");
