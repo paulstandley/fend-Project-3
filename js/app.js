@@ -231,11 +231,6 @@ function windowfuntion() {
             let takeDown2Class = takeDown2Star.getAttribute("class");
             takeDown2Class = takeDown2Star.removeAttribute(takeDown2Class);
             takeDown2Class = takeDown2Star.setAttribute("class", "fa fa-star blackStar");    
-        }else if(number == 80) {
-            let takeDown3Star = document.getElementById("thirdStar");
-            let takeDown3Class = takeDown3Star.getAttribute("class");
-            takeDown3Class = takeDown3Star.removeAttribute(takeDown3Class);
-            takeDown3Class = takeDown3Star.setAttribute("class", "fa fa-star blackStar");
         }
     }
 
@@ -246,9 +241,6 @@ function windowfuntion() {
         }
         if(number > 60) {
         valueStars = "One Stars";
-        }
-        if(number > 80){
-        valueStars = "No Stars";
         }
         stopCount();
         let displayScore = document.getElementById("displayModal");
