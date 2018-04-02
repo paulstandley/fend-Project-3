@@ -1,20 +1,17 @@
 # Memory Game Project
 
-## Table of Contents
+## website
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+ [paulstandley] (http://paulstandley.com)
 
-## Instructions
+ ## Repo
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+contrubutions welcome still buggy on removeal of correct clicks 
 
-To get started, open `js/app.js` and start building out the app's functionality
+ [github] (https://github.com/paulstandley/fend-Project-3)
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+ # This readMe is for Udacity 
 
-## Contributing
+ This is my first ever game and I had no plan going into this so I just did it.So I think I will redo it.
+ 
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
