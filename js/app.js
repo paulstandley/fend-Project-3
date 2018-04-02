@@ -26,6 +26,7 @@ function windowfuntion() {
     var id_check_2;
     var placeClicked;
     var bool = true;
+    var values_for_id_array = [];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -41,7 +42,6 @@ function windowfuntion() {
             stopCount();
             window.location.reload(false);
     }
-    
     
     function shuffleFunction() {
         const shuffledCards = shuffle(iconArrayHolder);
@@ -80,39 +80,47 @@ function windowfuntion() {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */ 
     newDeck.addEventListener("click", cardFun, true);
-    var if_clicked_correct;    
+    var if_clicked_correct; 
+    var dbclick;  
     function cardFun(evt) {
         if_clicked_correct = false;
+        
 //  get click location
         placeClicked = evt.target;
 // make sure click is on tiles        
         if(placeClicked.hasAttribute("id")) {
 //  get the values of dom for comparison push to keep hold of values
-            startCount();
-            clickCounterMoves();
             let clickedIcon_1 = placeClicked.getElementsByTagName("i");
             let clickedIcon_1Class = clickedIcon_1[0].getAttribute("class");
             numberOfClicks.push(clickedIcon_1Class);
+            startCount();
+            id_check_1 = placeClicked.getAttribute("id");
+            dbclick = placeClicked.getAttribute("id");
+            values_for_id_array.push(dbclick);
+/* make srue can not to increment click counter by pressing on same tile get the values array at index -1 -2 for comparison only increment for false values */             
+            if(numberOfClicks.length == 1) {
+                 if(values_for_id_array[values_for_id_array.length -2] == values_for_id_array[values_for_id_array.length -1] ) {
+                }else{
+                    clickCounterMoves();
+                }
+            }
+            if(numberOfClicks.length == 2) {
+                if(values_for_id_array[values_for_id_array.length -2] == values_for_id_array[values_for_id_array.length -1] ) {
+               }else{
+                   clickCounterMoves();
+               }     
+            }
             forLoopFunction();    
 //  first click event push to regester click and check vales off passed values   
-   
             if(numberOfClicks.length == 1) {
-                firstClick(placeClicked);
-                id_check_1 = placeClicked.getAttribute("id");
+                firstClick(placeClicked);   
                 id_check_array.push(id_check_1);
-        
-                if(if_clicked_correct) {
-                
-                }
 //  second click event 
             }else if(numberOfClicks.length == 2) {
-                secondClick(placeClicked);
                 id_check_2 = placeClicked.getAttribute("id");
                 id_check_array.push(id_check_2);
-                
-                if(if_clicked_correct) {
-                
-                }
+                forLoopFunction();    
+                secondClick(placeClicked);           
 // compare vales form dom and array 
                 if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] !=  id_check_2)) {
                     passed_values_for_id_array.push(id_check_array[0]);
@@ -126,8 +134,7 @@ function windowfuntion() {
                             callModel();
                             // winner ?
                         }
-                    
-                    rightFunction(placeClicked, id_check_array);                        
+                    rightFunction(placeClicked, id_check_array);                      
                     }else{
                     wrongFunction(placeClicked, id_check_array);
                 }
@@ -138,13 +145,17 @@ function windowfuntion() {
                 poped = id_check_array.pop();
                 poped = [];       
             }
+// end off id has atrr test            
         }
         reset_fall_wrong(placeClicked , id_check_array, passed_values_for_id_array);
-    }   
+    }  
+
     function forLoopFunction() {
         for (let i = 0; i < passed_values_for_id_array.length; i++) {
             if (id_check_1 == passed_values_for_id_array[i]) {
                 if_clicked_correct = true;
+            }else{
+                if_clicked_correct = false;
             }
         }
     }
@@ -221,12 +232,12 @@ function windowfuntion() {
     }
 
     function removeStars() {
-        if(number  == 45) {
+        if(number  == 60) {
             let takeDown1Star = document.getElementById("firstStar");
             let takeDown1Class = takeDown1Star.getAttribute("class");
             takeDown1Class = takeDown1Star.removeAttribute(takeDown1Class);
             takeDown1Class = takeDown1Star.setAttribute("class", "fa fa-star blackStar");
-        }else if(number == 60) {
+        }else if(number == 120) {
             let takeDown2Star = document.getElementById("secondStar");
             let takeDown2Class = takeDown2Star.getAttribute("class");
             takeDown2Class = takeDown2Star.removeAttribute(takeDown2Class);
@@ -236,10 +247,10 @@ function windowfuntion() {
 
     function callModel() {   
         let valueStars = "Three Stars";
-        if(number > 45) {
+        if(number > 60) {
         valueStars = "Two Stars";
         }
-        if(number > 60) {
+        if(number > 120) {
         valueStars = "One Stars";
         }
         stopCount();
@@ -277,6 +288,7 @@ function windowfuntion() {
     function closeModel() {
         modal.style.display = "none";
     }
+
 
 //end off widow function
 }
