@@ -29,9 +29,4 @@ Tap a tile remember it then try to match it to its correct icon on your next cli
 [fonts](https://fonts.googleapis.com/css?family=Coda)
 
 ## Repo
-
-contributions welcome still buggy on the removal of correct clicks tiles it removes them  
-
 [Github](https://github.com/paulstandley/fend-Project-3)
-#### Last Review
-[Review](https://review.udacity.com/#!/reviews/1131237) 
