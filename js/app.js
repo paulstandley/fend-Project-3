@@ -27,6 +27,7 @@ function windowfuntion() {
     var placeClicked;
     var bool = true;
     var values_for_id_array = [];
+    var holder_for_correct_clicks = [];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -97,19 +98,8 @@ function windowfuntion() {
             id_check_1 = placeClicked.getAttribute("id");
             dbclick = placeClicked.getAttribute("id");
             values_for_id_array.push(dbclick);
-/* make srue can not to increment click counter by pressing on same tile get the values array at index -1 -2 for comparison only increment for false values */             
-            if(numberOfClicks.length == 1) {
-                 if(values_for_id_array[values_for_id_array.length -2] == values_for_id_array[values_for_id_array.length -1] ) {
-                }else{
-                    clickCounterMoves();
-                }
-            }
-            if(numberOfClicks.length == 2) {
-                if(values_for_id_array[values_for_id_array.length -2] == values_for_id_array[values_for_id_array.length -1] ) {
-               }else{
-                   clickCounterMoves();
-               }     
-            }
+    /* make srue can not to increment click counter by pressing on same tile get the values array at index -1 -2 for comparison only increment for false values */             
+            clickLogicFunction();
             forLoopFunction();    
 //  first click event push to regester click and check vales off passed values   
             if(numberOfClicks.length == 1) {
@@ -129,8 +119,10 @@ function windowfuntion() {
                     keepScore.push(true);
                     if(if_clicked_correct) {
                         wrongFunction(placeClicked, id_check_array);
-                    }    
-                        if(keepScore.length == 8) {
+                    }
+                    holder_for_correct_clicks.push(clickedIcon_1Class);
+                        
+                        if(holder_for_correct_clicks.length == 8 ) {
                             callModel();
                             // winner ?
                         }
@@ -149,6 +141,23 @@ function windowfuntion() {
         }
         reset_fall_wrong(placeClicked , id_check_array, passed_values_for_id_array);
     }  
+
+    function clickLogicFunction() {
+        if (numberOfClicks.length == 1) {
+            if (values_for_id_array[values_for_id_array.length - 2] == values_for_id_array[values_for_id_array.length - 1]) {
+            }
+            else {
+                clickCounterMoves();
+            }
+        }
+        if (numberOfClicks.length == 2) {
+            if (values_for_id_array[values_for_id_array.length - 2] == values_for_id_array[values_for_id_array.length - 1]) {
+            }
+            else {
+                clickCounterMoves();
+            }
+        }
+    }
 
     function forLoopFunction() {
         for (let i = 0; i < passed_values_for_id_array.length; i++) {
@@ -193,9 +202,9 @@ function windowfuntion() {
         let rightClass = rightClicked.getAttribute("class");
         setTimeout(function(){
             rightIdElementClass = rightIdElement.removeAttribute(rightIdElementClass);
-            rightIdElementClass = rightIdElement.setAttribute("class", "card open show");  
+            rightIdElementClass = rightIdElement.setAttribute("class", "card open show removeClicked");  
             rightClass = rightClicked.removeAttribute(rightClass);
-            rightClass = rightClicked.setAttribute("class", "card open show");
+            rightClass = rightClicked.setAttribute("class", "card open show removeClicked");
         },1000);
     }
 

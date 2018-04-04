@@ -35,24 +35,3 @@ contributions welcome still buggy on the removal of correct clicks tiles it remo
 [Github](https://github.com/paulstandley/fend-Project-3)
 #### Last Review
 [Review](https://review.udacity.com/#!/reviews/1131237) 
-
-# For Udacity
-![Screen Shot](http://res.cloudinary.com/pieol2/image/upload/v1522768041/review-udacity.png)
-### click counter move is only called as long as the current click id is not the same as the id of the last one
-
-### counter dose does not increment by repeatedly clicking
-
-`if(numberOfClicks.length == 1) {
-    if(values_for_id_array[values_for_id_array.length -2] == values_for_id_array[values_for_id_array.length -1] ) {
-    }else{
-        clickCounterMoves();
-     }
-}
-if(numberOfClicks.length == 2) {
-    if(values_for_id_array[values_for_id_array.length -2] == values_for_id_array[values_for_id_array.length -1] ){    }else{
-        clickCounterMoves();
-    }
-}` 
-            
-### this works on my website on codepen on my vs code live sever It stops the increment of tapping the same tile 
-### is it two clicks for one move or somthing else? 
