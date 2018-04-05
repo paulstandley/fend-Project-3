@@ -98,8 +98,7 @@ function windowfuntion() {
             id_check_1 = placeClicked.getAttribute("id");
             dbclick = placeClicked.getAttribute("id");
             values_for_id_array.push(dbclick);
-    /* make srue can not to increment click counter by pressing on same tile get the values array at index -1 -2 for comparison only increment for false values */             
-            clickLogicFunction();
+
             forLoopFunction();    
 //  first click event push to regester click and check vales off passed values   
             if(numberOfClicks.length == 1) {
@@ -109,7 +108,9 @@ function windowfuntion() {
             }else if(numberOfClicks.length == 2) {
                 id_check_2 = placeClicked.getAttribute("id");
                 id_check_array.push(id_check_2);
-                forLoopFunction();    
+                forLoopFunction();  
+/* make srue can not to increment click counter by pressing on same tile get the values array at index -1 -2 for comparison only increment for false values */             
+                clickLogicFunction();  
                 secondClick(placeClicked);           
 // compare vales form dom and array 
                 if(numberOfClicks[0] == numberOfClicks[1] && (id_check_array[0] !=  id_check_2)) {
@@ -267,7 +268,7 @@ function windowfuntion() {
         displayScore.innerHTML = `<div class="template"><h2>Congratulations, Your Score</h2><span><h3>Second's Taken <strong>${number-1}</strong></h3><h3> Number of click's <strong>${keepCountMoves}</strong></h3><h3>You Have <strong>${valueStars}</strong></h3></span></div>`;
         modal.style.display = "block";
     }
-
+/*
     function reset_fall_wrong(placeClicked, id_check_array, passed_values_for_id_array) {
         
         if(passed_values_for_id_array === undefined && passed_values_for_id_array === null && id_check_array[0] === undefined && id_check_array[0] === null && id_check_array[1] === undefined && id_check_array[1] === null) {
@@ -276,7 +277,7 @@ function windowfuntion() {
         for(let i = 0; i < passed_values_for_id_array.length; i++) {
     
             if(id_check_array[1] == passed_values_for_id_array[i]) {
-        /*  I should not put a funcion in a loop but I have run out off time  */
+    
                 let wrongIdElement = document.getElementById(id_check_array[1]);
                 let wrongIdElementClass = wrongIdElement.getAttribute("class");
                 let wrongClicked = placeClicked;
@@ -291,6 +292,7 @@ function windowfuntion() {
         }
     }
     }
+    */
 
     modal.querySelector(".endGame").addEventListener("click", closeModel);
 
