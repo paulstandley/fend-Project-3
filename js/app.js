@@ -268,38 +268,12 @@ function windowfuntion() {
         displayScore.innerHTML = `<div class="template"><h2>Congratulations, Your Score</h2><span><h3>Second's Taken <strong>${number-1}</strong></h3><h3> Number of click's <strong>${keepCountMoves}</strong></h3><h3>You Have <strong>${valueStars}</strong></h3></span></div>`;
         modal.style.display = "block";
     }
-/*
-    function reset_fall_wrong(placeClicked, id_check_array, passed_values_for_id_array) {
-        
-        if(passed_values_for_id_array === undefined && passed_values_for_id_array === null && id_check_array[0] === undefined && id_check_array[0] === null && id_check_array[1] === undefined && id_check_array[1] === null) {
-            
-        }else{
-        for(let i = 0; i < passed_values_for_id_array.length; i++) {
-    
-            if(id_check_array[1] == passed_values_for_id_array[i]) {
-    
-                let wrongIdElement = document.getElementById(id_check_array[1]);
-                let wrongIdElementClass = wrongIdElement.getAttribute("class");
-                let wrongClicked = placeClicked;
-                let wrongClass = wrongClicked.getAttribute("class");
-                setTimeout(function(){        
-                    wrongIdElementClass = wrongIdElement.removeAttribute(wrongIdElementClass);
-                    wrongIdElementClass = wrongIdElement.setAttribute("class", "card open show");
-                    wrongClass = wrongClicked.removeAttribute(wrongClass);
-                    wrongClass = wrongClicked.setAttribute("class", "card open show");       
-                },1100);
-            }
-        }
-    }
-    }
-    */
 
     modal.querySelector(".endGame").addEventListener("click", closeModel);
 
     function closeModel() {
         modal.style.display = "none";
     }
-
 
 //end off widow function
 }
