@@ -1,7 +1,7 @@
 # Memory Game Project
 
 ![Profile Pick](http://res.cloudinary.com/pieol2/image/upload/v1516543296/profile-small.png)
- 
+
 ## Game logic by __Paul Standley__
 
 A Udacity Nano Degree Project
@@ -14,7 +14,7 @@ A game of memory you have to match the icons
 
 ![Game Display](http://res.cloudinary.com/pieol2/image/upload/v1522766741/paulstandleyPro3-1.png)
 
-## Where to find the game 
+## Where to find the game
 
 play it on my website just start clicking
 [paulstandley](http://paulstandley.com)
