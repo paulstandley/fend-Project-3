@@ -1,6 +1,6 @@
 # Memory Game Project
 
-![Profile Pick](http://res.cloudinary.com/pieol2/image/upload/v1516543296/profile-small.png)
+![Profile Pick](https://res.cloudinary.com/pieol2/image/upload/v1516543296/profile-small.png)
 
 ## Game logic by __Paul Standley__
 
